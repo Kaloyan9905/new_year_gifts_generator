@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Environment files
+.env
+
+# Virtual environment folder (if you use one)
+.venv/
+env/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
