@@ -29,9 +29,9 @@ def send_gmail(to_email, subject, html_body):
     print(f"✅ Email sent successfully to {to_email}!")
 
 
-def generate_sender_receiver_pairs(emails):
-    senders = emails[:]
-    receivers = emails[:]
+def generate_sender_receiver_pairs(_emails):
+    senders = _emails[:]
+    receivers = _emails[:]
 
     while True:
         random.shuffle(senders)
@@ -72,7 +72,7 @@ def generate_sender_receiver_pairs(emails):
 #     </html>
 #     """
 
-def generate_html_message(sender_name, receiver_name, reveal_link):
+def generate_html_message(sender_name, reveal_link):
     return f"""
     <html>
     <body style="font-family: 'Segoe UI', Arial, sans-serif; background-color: #f7f7f7; padding: 20px;">
@@ -114,14 +114,14 @@ def generate_html_message(sender_name, receiver_name, reveal_link):
     """
 
 
-
-def generate_and_send_messages(pairs, users, send=False):
-    for sender, receiver in pairs.items():
-        sender_name = users[sender]
-        receiver_name = users[receiver]
+def generate_and_send_messages(_pairs, _users, send=False):
+    for sender, receiver in _pairs.items():
+        sender_name = _users[sender]
+        receiver_name = _users[receiver]
         subject = "🎅 Your Secret Gift Exchange Match!"
-        reveal_link = f"https://your-username.github.io/secret-gift-scratch/?user={receiver_name}"
-        html_body = generate_html_message(sender_name, receiver_name, reveal_link)
+        base_url = "https://kaloyan9905.github.io/new_year_gifts_generator/"
+        reveal_link = f"{base_url}?user={receiver_name}"
+        html_body = generate_html_message(sender_name, reveal_link)
 
         if send:
             send_gmail(sender, subject, html_body)
@@ -130,6 +130,7 @@ def generate_and_send_messages(pairs, users, send=False):
             print(f"--- Email preview for {sender} ---")
             print(html_body)
             print("-" * 60)
+
 
 if __name__ == "__main__":
     # Example usage
@@ -145,11 +146,13 @@ if __name__ == "__main__":
     emails = [
         "milchevkaloian@gmail.com",
         "krasimirowichh2005@gmail.com",
+        "jordanovakatrin@gmail.com",
     ]
 
     users = {
         "milchevkaloian@gmail.com": "Koko",
-        "krasimirowichh2005@gmail.com": "Krasi"
+        "krasimirowichh2005@gmail.com": "Krasi",
+        "jordanovakatrin@gmail.com": "Kati"
     }
 
     # users = {
@@ -162,4 +165,4 @@ if __name__ == "__main__":
     # }
 
     pairs = generate_sender_receiver_pairs(emails)
-    generate_and_send_messages(pairs, users, send=False)  # change to True to send
+    generate_and_send_messages(pairs, users, send=True)  # change to True to send
